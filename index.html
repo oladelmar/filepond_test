@@ -7,16 +7,182 @@
       href="https://unpkg.com/filepond/dist/filepond.css"
       rel="stylesheet"
     />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
     <title>Test FilePond</title>
   </head>
   <body>
     <h1>Test FilePond and Camera Roll on iOS 13</h1>
     <input id="filepond_input" type="file" />
 
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
     <script>
+      FilePond.registerPlugin(FilePondPluginImagePreview);
       const inputElement = document.querySelector('input[type="file"]');
-      const pond = FilePond.create(inputElement);
+//      const pond = FilePond.create(inputElement);
+//      const pond = FilePond.create(inputElement, {
+//        iconUndo:
+//          '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
+//        labelIdle: "Drag and drop file here",
+//        labelTapToUndo: '',
+//        allowDrop: true,
+//        allowBrowse: true,
+//        allowPaste: true,
+//        allowMultiple: true,
+//        allowReplace: true,
+//        allowRevert: false,
+//        instantUpload: false,
+//        maxFiles: 3,
+//        allowFileTypeValidation: false,
+//        acceptedFileTypes: [""],
+//        labelFileTypeNotAllowed: "File type not allowed",
+//        fileValidateTypeLabelExpectedTypes: "Unexpected File type",
+//        allowFileSizeValidation: false,
+//        maxFileSize: "50MB",
+//        maxTotalFileSize: "50MB",
+//        labelMaxFileSizeExceeded: "Label",
+//        labelMaxFileSize: "Label",
+//        labelTotalFileSizeExceeded: "Label",
+//        labelMaxTotalFileSize: "Label",
+//        allowImageCrop: false,
+//        imageCropAspectRatio: "3:4",
+//        allowImagePreview: true,
+//        allowImageResize: true,
+//        imageResizeTargetWidth: 100,
+//        imageResizeTargetHeight: 100,
+//        imageResizeMode: "cover",
+//        imageResizeUpscale: true,
+//        allowImageValidateSize: true,
+//        imageValidateSizeMinWidth: 50,
+//        imageValidateSizeMaxWidth: 500,
+//        imageValidateSizeMinHeight: 50,
+//        imageValidateSizeMaxHeight: 500,
+//        imageValidateSizeLabelImageSizeTooSmall:
+//          "Label",
+//        imageValidateSizeLabelImageSizeTooBig:
+//          "Label",
+//        imageValidateSizeLabelExpectedMinSize:
+//          "Label",
+//        imageValidateSizeLabelExpectedMaxSize:
+//          "Label",
+//        allowImageTransform: true,
+//        labelTapToCancel: '',
+//        imageTransformOutputQuality: 100,
+//        fileValidateTypeDetectType: (source, type) =>
+//          new Promise((resolve, reject) => {
+//            resolve(type);
+//          }),
+//        server: {
+//          revert: null,
+//          process: (
+//            fieldName,
+//            file,
+//            metadata,
+//            load,
+//            error,
+//            progress,
+//            abort
+//          ) => {
+//            PreparedServerForUpload(
+//              fieldName,
+//              file,
+//              metadata,
+//              load,
+//              error,
+//              progress,
+//              abort
+//            );
+//            return {
+//              abort: () => {
+//                abort();
+//              },
+//            };
+//          },
+//        },
+//      });
+      const pond = $(inputElement).filepond({
+        iconUndo:
+          '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
+        labelIdle: "Drag and drop file here",
+        labelTapToUndo: '',
+        allowDrop: true,
+        allowBrowse: true,
+        allowPaste: true,
+        allowMultiple: true,
+        allowReplace: true,
+        allowRevert: false,
+        instantUpload: false,
+        maxFiles: 3,
+        allowFileTypeValidation: false,
+        acceptedFileTypes: [""],
+        labelFileTypeNotAllowed: "File type not allowed",
+        fileValidateTypeLabelExpectedTypes: "Unexpected File type",
+        allowFileSizeValidation: false,
+        maxFileSize: "50MB",
+        maxTotalFileSize: "50MB",
+        labelMaxFileSizeExceeded: "Label",
+        labelMaxFileSize: "Label",
+        labelTotalFileSizeExceeded: "Label",
+        labelMaxTotalFileSize: "Label",
+        allowImageCrop: false,
+        imageCropAspectRatio: "3:4",
+        allowImagePreview: true,
+        allowImageResize: true,
+        imageResizeTargetWidth: 100,
+        imageResizeTargetHeight: 100,
+        imageResizeMode: "cover",
+        imageResizeUpscale: true,
+        allowImageValidateSize: true,
+        imageValidateSizeMinWidth: 50,
+        imageValidateSizeMaxWidth: 500,
+        imageValidateSizeMinHeight: 50,
+        imageValidateSizeMaxHeight: 500,
+        imageValidateSizeLabelImageSizeTooSmall:
+          "Label",
+        imageValidateSizeLabelImageSizeTooBig:
+          "Label",
+        imageValidateSizeLabelExpectedMinSize:
+          "Label",
+        imageValidateSizeLabelExpectedMaxSize:
+          "Label",
+        allowImageTransform: true,
+        labelTapToCancel: '',
+        imageTransformOutputQuality: 100,
+        fileValidateTypeDetectType: (source, type) =>
+          new Promise((resolve, reject) => {
+            resolve(type);
+          }),
+        server: {
+          revert: null,
+          process: (
+            fieldName,
+            file,
+            metadata,
+            load,
+            error,
+            progress,
+            abort
+          ) => {
+            PreparedServerForUpload(
+              fieldName,
+              file,
+              metadata,
+              load,
+              error,
+              progress,
+              abort
+            );
+            return {
+              abort: () => {
+                abort();
+              },
+            };
+          },
+        },
+      });
     </script>
   </body>
 </html>
