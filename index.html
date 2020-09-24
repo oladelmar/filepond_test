@@ -17,10 +17,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+      <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
     <script>
       FilePond.registerPlugin(FilePondPluginImagePreview);
+      FilePond.registerPlugin(FilePondPluginImageExifOrientation);
       const inputElement = document.querySelector('input[type="file"]');
 //      const pond = FilePond.create(inputElement);
 //      const pond = FilePond.create(inputElement, {
@@ -149,6 +151,7 @@
         imageValidateSizeLabelExpectedMaxSize:
           "Label",
         allowImageTransform: true,
+        allowImageExifOrientation: true,
         labelTapToCancel: '',
         imageTransformOutputQuality: 100,
         fileValidateTypeDetectType: (source, type) =>
