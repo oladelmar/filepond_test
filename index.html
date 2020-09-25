@@ -160,35 +160,33 @@
               if (result.contentSettings) {
                 SetUrlsArr(blobService.getUrl('plugins', result.name));
                 load(result.contentSettings.contentMD5);
-                if (file.type.indexOf('image') === 0) {
-                  getHeightAndWidthImg(
-                    blobService.getUrl('plugins', result.name)
-                  );
-                }
+                // if (file.type.indexOf('image') === 0) {
+                //   getHeightAndWidthImg(
+                //     blobService.getUrl('plugins', result.name)
+                //   );
+                // }
               } else {
                 SetUrlsArr(blobService.getUrl('plugins', fileName));
 
                 load(response.headers['content-md5']);
-                if (file.type.indexOf('image') === 0) {
-                  getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
-                }
+                // if (file.type.indexOf('image') === 0) {
+                //   getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
+                // }
               }
             }
           }
         );
       };
 
-      const getHeightAndWidthImg = (url) => {
-        let width, height;
-        let img = document.createElement('img');
-        img.onload = () => {
-          width = img.naturalWidth || img.width;
-          height = img.naturalHeight || img.height;
-          instance.publishState('image_width', width);
-          instance.publishState('image_height', height);
-        };
-        img.src = url;
-      };
+      // const getHeightAndWidthImg = (url) => {
+      //   let width, height;
+      //   let img = document.createElement('img');
+      //   img.onload = () => {
+      //     width = img.naturalWidth || img.width;
+      //     height = img.naturalHeight || img.height;
+      //   };
+      //   img.src = url;
+      // };
     </script>
   </body>
 </html>
