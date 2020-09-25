@@ -26,6 +26,7 @@
     <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
@@ -37,6 +38,7 @@
       FilePond.registerPlugin(FilePondPluginImageExifOrientation);
       FilePond.registerPlugin(FilePondPluginImagePreview);
       FilePond.registerPlugin(FilePondPluginImageResize);
+      FilePond.registerPlugin(FilePondPluginImageValidateSize);
       FilePond.registerPlugin(FilePondPluginImageTransform);
       const inputElement = document.querySelector('input[type="file"]');
 
@@ -65,7 +67,7 @@
         labelTotalFileSizeExceeded: 'Label',
         labelMaxTotalFileSize: 'Label',
         allowImageCrop: false,
-        imageCropAspectRatio: '3:4',
+        imageCropAspectRatio: '1:1',
         allowImagePreview: true,
         allowImageResize: true,
         imageResizeTargetWidth: 100,
@@ -73,10 +75,10 @@
         imageResizeMode: 'cover',
         imageResizeUpscale: true,
         allowImageValidateSize: true,
-        imageValidateSizeMinWidth: 50,
-        imageValidateSizeMaxWidth: 500,
-        imageValidateSizeMinHeight: 50,
-        imageValidateSizeMaxHeight: 500,
+        imageValidateSizeMinWidth: 1,
+        imageValidateSizeMaxWidth: 5000,
+        imageValidateSizeMinHeight: 1,
+        imageValidateSizeMaxHeight: 5000,
         imageValidateSizeLabelImageSizeTooSmall: 'Label',
         imageValidateSizeLabelImageSizeTooBig: 'Label',
         imageValidateSizeLabelExpectedMinSize: 'Label',
