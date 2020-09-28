@@ -178,6 +178,28 @@
         );
       };
 
+      setTimeout(() => {
+        $('input').change(() => {
+          console.log('Setting uploader_is_empty to false');
+        });
+      }, 300);
+
+      setTimeout(() => {
+        const onFilePondStyleChange = (mutations) => {
+          const newHeight = +mutations[0].target.style.height.replace('px', '');
+          setTimeout((_) => console.log('Changing height here'), 300);
+        };
+
+        const mutationObserver = new window.MutationObserver(
+          onFilePondStyleChange
+        );
+
+        mutationObserver.observe(inputElement, {
+          attributes: true,
+          attributeFilter: ['style'],
+        });
+      });
+
       // const getHeightAndWidthImg = (url) => {
       //   let width, height;
       //   let img = document.createElement('img');
