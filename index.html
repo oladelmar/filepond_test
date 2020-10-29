@@ -45,8 +45,9 @@
       const inputElement = document.querySelector('input[type="file"]');
 
       const pond = $(inputElement).filepond({
-        iconUndo:
-          '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
+        iconUndo: '',
+        // iconUndo:
+        //   '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
         labelIdle: 'Drag and drop file here',
         labelTapToUndo: '',
         allowDrop: true,
@@ -56,14 +57,14 @@
         allowReplace: true,
         allowRevert: false,
         instantUpload: false,
-        maxFiles: 3,
+        maxFiles: 10,
         allowFileTypeValidation: false,
         acceptedFileTypes: [''],
         labelFileTypeNotAllowed: 'File type not allowed',
         fileValidateTypeLabelExpectedTypes: 'Unexpected File type',
         allowFileSizeValidation: false,
-        maxFileSize: '50MB',
-        maxTotalFileSize: '50MB',
+        maxFileSize: '100MB',
+        maxTotalFileSize: '500MB',
         labelMaxFileSizeExceeded: 'Label',
         labelMaxFileSize: 'Label',
         labelTotalFileSizeExceeded: 'Label',
