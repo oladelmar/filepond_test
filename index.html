@@ -160,29 +160,23 @@
               if (result.contentSettings) {
                 SetUrlsArr(blobService.getUrl('plugins', result.name));
                 load(result.contentSettings.contentMD5);
-                // if (file.type.indexOf('image') === 0) {
-                //   getHeightAndWidthImg(
-                //     blobService.getUrl('plugins', result.name)
-                //   );
-                // }
+                if (file.type.indexOf('image') === 0) {
+                  getHeightAndWidthImg(
+                    blobService.getUrl('plugins', result.name)
+                  );
+                }
               } else {
                 SetUrlsArr(blobService.getUrl('plugins', fileName));
 
                 load(response.headers['content-md5']);
-                // if (file.type.indexOf('image') === 0) {
-                //   getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
-                // }
+                if (file.type.indexOf('image') === 0) {
+                  getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
+                }
               }
             }
           }
         );
       };
-
-      setTimeout(() => {
-        $('input').change(() => {
-          console.log('Setting uploader_is_empty to false');
-        });
-      }, 300);
 
       setTimeout(() => {
         const onFilePondStyleChange = (mutations) => {
@@ -206,6 +200,8 @@
       //   img.onload = () => {
       //     width = img.naturalWidth || img.width;
       //     height = img.naturalHeight || img.height;
+      //     console.log(`Width: ${width}`);
+      //     console.log(`Height: ${height}`);
       //   };
       //   img.src = url;
       // };
