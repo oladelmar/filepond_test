@@ -31,7 +31,7 @@
     <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
     <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-    <!-- <script src="azure-storage.blob.min.js"></script> -->
+    <script src="azure-storage.blob.min.js"></script> 
     <script>
       FilePond.registerPlugin(FilePondPluginFileEncode);
       FilePond.registerPlugin(FilePondPluginFileValidateType);
@@ -46,8 +46,8 @@
 
       const pond = $(inputElement).filepond({
         iconUndo: '',
-        // iconUndo:
-        //   '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
+        iconUndo:
+           '<img aria-hidden="true" width="26" height="26" href="https://dd7tel2830j4w.cloudfront.net/f1534376079157x625770247541368000/cancel.svg"/>',
         labelIdle: 'Drag and drop file here',
         labelTapToUndo: '',
         allowDrop: true,
@@ -71,7 +71,7 @@
         labelMaxTotalFileSize: 'Label',
         allowImageCrop: false,
         imageCropAspectRatio: '1:1',
-        allowImagePreview: false,
+        allowImagePreview: true,
         allowImageResize: true,
         imageResizeTargetWidth: 100,
         imageResizeTargetHeight: 100,
@@ -96,117 +96,117 @@
           }),
         server: {
           revert: null,
-          // process: (
-          //   fieldName,
-          //   file,
-          //   metadata,
-          //   load,
-          //   error,
-          //   progress,
-          //   abort
-          // ) => {
-          //   PreparedServerForUpload(
-          //     fieldName,
-          //     file,
-          //     metadata,
-          //     load,
-          //     error,
-          //     progress,
-          //     abort
-          //   );
-          //   return {
-          //     abort: () => {
-          //       abort();
-          //     },
-          //   };
-          // },
+           process: (
+             fieldName,
+             file,
+             metadata,
+             load,
+             error,
+             progress,
+             abort
+           ) => {
+             PreparedServerForUpload(
+               fieldName,
+               file,
+               metadata,
+               load,
+               error,
+               progress,
+               abort
+             );
+             return {
+               abort: () => {
+                 abort();
+               },
+             };
+           },
         },
       });
 
-      // const filesArrUrl = [];
+       const filesArrUrl = [];
 
-      // const SetUrlsArr = (url) => {
-      //   filesArrUrl.push(url);
-      // };
+       const SetUrlsArr = (url) => {
+         filesArrUrl.push(url);
+       };
 
-      // const PreparedServerForUpload = function (
-      //   fieldName,
-      //   file,
-      //   metadata,
-      //   load,
-      //   error,
-      //   progress
-      // ) {
-      //   const account = {
-      //     name: 'uploadermulte',
-      //     sas:
-      //       '?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-01-08T17:28:54Z&st=2020-06-18T08:28:54Z&spr=https,http&sig=RJVNWNYboJcl4ywTyxjX70vzXISgjMDeQtSDhWea71A%3D',
-      //   };
-      //   const blobUri = 'https://' + account.name + '.blob.core.windows.net';
-      //   const blobService = AzureStorage.Blob.createBlobServiceWithSas(
-      //     blobUri,
-      //     account.sas
-      //   );
+       const PreparedServerForUpload = function (
+         fieldName,
+         file,
+         metadata,
+         load,
+         error,
+         progress
+       ) {
+         const account = {
+           name: 'uploadermulte',
+           sas:
+             '?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-01-08T17:28:54Z&st=2020-06-18T08:28:54Z&spr=https,http&sig=RJVNWNYboJcl4ywTyxjX70vzXISgjMDeQtSDhWea71A%3D',
+         };
+         const blobUri = 'https://' + account.name + '.blob.core.windows.net';
+         const blobService = AzureStorage.Blob.createBlobServiceWithSas(
+           blobUri,
+           account.sas
+         );
 
-      //   const timestamp = Date.now();
-      //   const fileName = `${timestamp}_${file.name}`;
+         const timestamp = Date.now();
+         const fileName = `${timestamp}_${file.name}`;
 
-      //   blobService.createBlockBlobFromBrowserFile(
-      //     'plugins',
-      //     fileName,
-      //     file,
-      //     (err, result, response) => {
-      //       if (err) {
-      //         error(err);
-      //       } else {
-      //         if (result.contentSettings) {
-      //           SetUrlsArr(blobService.getUrl('plugins', result.name));
-      //           load(result.contentSettings.contentMD5);
-      //           if (file.type.indexOf('image') === 0) {
-      //             getHeightAndWidthImg(
-      //               blobService.getUrl('plugins', result.name)
-      //             );
-      //           }
-      //         } else {
-      //           SetUrlsArr(blobService.getUrl('plugins', fileName));
+         blobService.createBlockBlobFromBrowserFile(
+           'plugins',
+           fileName,
+           file,
+           (err, result, response) => {
+             if (err) {
+               error(err);
+             } else {
+               if (result.contentSettings) {
+                 SetUrlsArr(blobService.getUrl('plugins', result.name));
+                 load(result.contentSettings.contentMD5);
+                 if (file.type.indexOf('image') === 0) {
+                   getHeightAndWidthImg(
+                     blobService.getUrl('plugins', result.name)
+                   );
+                 }
+               } else {
+                 SetUrlsArr(blobService.getUrl('plugins', fileName));
 
-      //           load(response.headers['content-md5']);
-      //           if (file.type.indexOf('image') === 0) {
-      //             getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
-      //           }
-      //         }
-      //       }
-      //     }
-      //   );
-      // };
+                 load(response.headers['content-md5']);
+                 if (file.type.indexOf('image') === 0) {
+                   getHeightAndWidthImg(blobService.getUrl('plugins', fileName));
+                 }
+               }
+             }
+           }
+         );
+       };
 
-      // setTimeout(() => {
-      //   const onFilePondStyleChange = (mutations) => {
-      //     const newHeight = +mutations[0].target.style.height.replace('px', '');
-      //     setTimeout((_) => console.log('Changing height here'), 300);
-      //   };
+       setTimeout(() => {
+         const onFilePondStyleChange = (mutations) => {
+           const newHeight = +mutations[0].target.style.height.replace('px', '');
+           setTimeout((_) => console.log('Changing height here'), 300);
+         };
 
-      //   const mutationObserver = new window.MutationObserver(
-      //     onFilePondStyleChange
-      //   );
+         const mutationObserver = new window.MutationObserver(
+           onFilePondStyleChange
+         );
 
-      //   mutationObserver.observe(inputElement, {
-      //     attributes: true,
-      //     attributeFilter: ['style'],
-      //   });
-      // });
+         mutationObserver.observe(inputElement, {
+           attributes: true,
+           attributeFilter: ['style'],
+         });
+       });
 
-      // const getHeightAndWidthImg = (url) => {
-      //   let width, height;
-      //   let img = document.createElement('img');
-      //   img.onload = () => {
-      //     width = img.naturalWidth || img.width;
-      //     height = img.naturalHeight || img.height;
-      //     console.log(`Width: ${width}`);
-      //     console.log(`Height: ${height}`);
-      //   };
-      //   img.src = url;
-      // };
+       const getHeightAndWidthImg = (url) => {
+         let width, height;
+         let img = document.createElement('img');
+         img.onload = () => {
+           width = img.naturalWidth || img.width;
+           height = img.naturalHeight || img.height;
+           console.log(`Width: ${width}`);
+           console.log(`Height: ${height}`);
+         };
+         img.src = url;
+       };
     </script>
   </body>
 </html>
